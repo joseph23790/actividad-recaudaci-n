@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TPV Restaurante</title>
+  <title>Actividad Recaudación</title>
+  <link rel="icon" href="logo-web.png">
   <style>
     body {
       font-family: sans-serif;
@@ -91,14 +92,14 @@
     <div id="cuenta">
       <h2>Cuenta</h2>
       <ul id="lista"></ul>
-      <p><strong>Total: $<span id="total">0.00</span></strong></p>
+      <p><strong>Total: <span id="total">0.00</span>€</strong></p>
     </div>
     <div id="productos"></div>
   </main>
 
   <footer>
-    <button onclick="borrarCuenta()">Borrar</button>
-    <button onclick="generarTicket()">Pagar</button>
+    <button onclick="borrarCuenta()">Borrar cuenta</button>
+    <button onclick="generarTicket()">Pagar cuenta</button>
   </footer>
 
   <div id="ticket"></div>
@@ -107,16 +108,11 @@
   <script>
     const productos = {
       comidas: [
-        { nombre: 'Hamburguesa', precio: 5.00 },
-        { nombre: 'Pizza', precio: 6.50 },
-        { nombre: 'Ensalada', precio: 4.25 },
-        { nombre: 'Bocadillo', precio: 3.50 }
+        { nombre: 'Carne', precio: 5.00 },
+        { nombre: 'Pollo', precio: 5.00 },
+        { nombre: 'Menú infantil', precio: 5.00 }
       ],
       bebidas: [
-        { nombre: 'Agua', precio: 1.00 },
-        { nombre: 'Coca-Cola', precio: 1.50 },
-        { nombre: 'Café', precio: 1.20 },
-        { nombre: 'Zumo', precio: 1.30 }
       ]
     };
 
@@ -128,7 +124,7 @@
       productos[cat].forEach(p => {
         const btn = document.createElement('div');
         btn.className = 'producto';
-        btn.textContent = `${p.nombre} \n$${p.precio.toFixed(2)}`;
+        btn.textContent = `${p.nombre} \n${p.precio.toFixed(2)}€`;
         btn.onclick = () => agregarProducto(p);
         cont.appendChild(btn);
       });
@@ -147,7 +143,7 @@
       cuenta.forEach((p, i) => {
         suma += p.precio;
         const li = document.createElement('li');
-        li.textContent = `${p.nombre} - $${p.precio.toFixed(2)}`;
+        li.textContent = `${p.nombre} - ${p.precio.toFixed(2)}€`;
         lista.appendChild(li);
       });
       total.textContent = suma.toFixed(2);
@@ -165,9 +161,9 @@
         <div style="width:300px;padding:20px;background:#fff;font-family:monospace">
           <h3>Actividad Recaudación</h3>
           <hr />
-          ${cuenta.map(p => `<p>${p.nombre} ............ $${p.precio.toFixed(2)}</p>`).join('')}
+          ${cuenta.map(p => `<p>${p.nombre} ............ ${p.precio.toFixed(2)}€</p>`).join('')}
           <hr />
-          <p><strong>TOTAL: $${cuenta.reduce((a, b) => a + b.precio, 0).toFixed(2)}</strong></p>
+          <p><strong>TOTAL: ${cuenta.reduce((a, b) => a + b.precio, 0).toFixed(2)}€</strong></p>
         </div>
       `;
       html2canvas(ticket.firstElementChild).then(canvas => {
